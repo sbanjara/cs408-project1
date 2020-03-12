@@ -45,9 +45,16 @@ public class TicTacToeView extends AppCompatActivity {
 
         setResult( getResources().getString(R.string.welcome) );
 
-        //
-        // INSERT YOUR CODE HERE
-        //
+        for (int row = 0; row < size; ++row) {
+            for (int col = 0; col < size; ++col) {
+
+                TicTacToeSquare square = new TicTacToeSquare(row, col);
+                int id = getSquareId(square);
+                TextView t = (TextView) findViewById(id);
+                t.setText("");
+
+            }
+        }
 
     }
 
@@ -71,9 +78,10 @@ public class TicTacToeView extends AppCompatActivity {
 
             if (propertyValue instanceof TicTacToeSquare) {
 
-                //
-                // INSERT YOUR CODE HERE
-                //
+                String mark = controller.getMarkAsString((TicTacToeSquare) propertyValue);
+                int id = getSquareId((TicTacToeSquare) propertyValue);
+                TextView t = (TextView) findViewById(id);
+                t.setText(mark);
 
             }
 
@@ -117,11 +125,13 @@ public class TicTacToeView extends AppCompatActivity {
         //
 
         String name = getViewName(v);
-        Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show(); // disable this later
+        int row = Integer.parseInt(name.substring(6, 7));
+        int col = Integer.parseInt(name.substring(7));
 
-        //
-        // INSERT YOUR CODE HERE
-        //
+        controller.processInput(new TicTacToeSquare(row, col));
+        //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show(); // disable this later
+
+
 
     }
 
