@@ -127,8 +127,9 @@ public class TicTacToeView extends AppCompatActivity {
         String name = getViewName(v);
         int row = Integer.parseInt(name.substring(6, 7));
         int col = Integer.parseInt(name.substring(7));
+        TicTacToeSquare square = new TicTacToeSquare(row, col);
 
-        controller.processInput(new TicTacToeSquare(row, col));
+        controller.processInput(square);
         //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show(); // disable this later
 
 

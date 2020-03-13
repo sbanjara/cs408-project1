@@ -74,12 +74,12 @@ public class TicTacToeModel {
 
             if (xTurn) {
                 grid[row][col] = Mark.X;
-                firePropertyChange(TicTacToeController.SET_SQUARE_X, square, Mark.X);
+                firePropertyChange(TicTacToeController.SET_SQUARE_X, this, square);
                 xTurn = false;
             }
             else {
                 grid[row][col] = Mark.O;
-                firePropertyChange(TicTacToeController.SET_SQUARE_O, square, Mark.O);
+                firePropertyChange(TicTacToeController.SET_SQUARE_O, this, square);
                 xTurn = true;
             }
             markMade = true;
@@ -191,21 +191,19 @@ public class TicTacToeModel {
         /* Checks the squares of the board to see if the game is a tie */
 
         boolean isTie = false;
-        boolean emptySquares = false;
+        int count = 0;
 
         for (int row = 0; row < size; ++row) {
             for (int col = 0; col < size; ++col) {
 
-                if (isSquareMarked(row, col) == false) {
-                    emptySquares = true;
-                    break;
+                if (isSquareMarked(row, col)) {
+                    count++;
                 }
 
             }
         }
 
-        if ( (isMarkWin(Mark.X) == false) && (isMarkWin(Mark.O) == false) &&
-                (emptySquares == false) ) {
+        if ( (isMarkWin(Mark.X) == false) && (isMarkWin(Mark.O) == false) && (count == size * size) ) {
             isTie = true;
         }
 
