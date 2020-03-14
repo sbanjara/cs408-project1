@@ -33,19 +33,18 @@ public class TicTacToeView extends AppCompatActivity {
 
     public void resetView() {
 
-        //
-        // This method resets the Activity to its default state.  It should display the welcome
-        // message in the result TextView, and clear any text in the grid TextViews.  (Hint: the
-        // grid TextViews are all named according to the pattern "SquareYX", with Y being the row
-        // and X being the column.  Iterate through them with a nested for-loop and use the helper
-        // function "getSquareId()" to acquire the TextView IDs.
-        //
+        /* This method resets the Activity to its default state.  It should display the welcome
+           message in the result TextView, and clear any text in the grid TextViews.  (Hint: the
+           grid TextViews are all named according to the pattern "SquareYX", with Y being the row
+           and X being the column.  Iterate through them with a nested for-loop and use the helper
+           function "getSquareId()" to acquire the TextView IDs. */
 
         int size = controller.getGridSize();
 
         setResult( getResources().getString(R.string.welcome) );
 
         for (int row = 0; row < size; ++row) {
+
             for (int col = 0; col < size; ++col) {
 
                 TicTacToeSquare square = new TicTacToeSquare(row, col);
@@ -54,21 +53,18 @@ public class TicTacToeView extends AppCompatActivity {
                 t.setText("");
 
             }
+
         }
 
     }
 
     public void modelPropertyChange(final PropertyChangeEvent e) {
 
-        //
-        // This method is called by the Controller when a property change in the Model must be
-        // reflected in the View.  It should: get the name and value of the updated property, check
-        // the property name/event that was changed, and if it matches a property that is contained
-        // in this View, update the View to the new value.  (In this case, the model changes are X
-        // or O marks that must be shown in the grid; the property value is the target square.
-        // Cast this object back to a TicTacToeSquare, then use the "getMarkAsString()" method of
-        // the Controller to get the mark.)
-        //
+        /* This method is called by the Controller when a property change in the Model must be
+           reflected in the View.  It gets the name and value of the updated property, checks
+           the property name/event that was changed, and if it matches a property that is contained
+           in this View, updates the View to the new value.  (In this case, the model changes are X
+           or O marks that must be shown in the grid; the property value is the target square. */
 
         String propertyName = e.getPropertyName();
         Object propertyValue = e.getNewValue();
@@ -91,11 +87,9 @@ public class TicTacToeView extends AppCompatActivity {
 
     private int getSquareId(TicTacToeSquare square) {
 
-        //
-        // This "helper method" accepts a TicTacToeSquare object, containing the row and column of
-        // the target square, and returns the ID of the corresponding TextView in the grid.  This
-        // ID can then be used with "findViewById()" to acquire a reference to the TextView.
-        //
+        /* This "helper method" accepts a TicTacToeSquare object, containing the row and column of
+           the target square, and returns the ID of the corresponding TextView in the grid.  This
+           ID can then be used with "findViewById()" to acquire a reference to the TextView. */
 
         String name = "Square" + square.getRow() + square.getCol();
         int id = getResources().getIdentifier(name, "id", getPackageName());
@@ -105,9 +99,7 @@ public class TicTacToeView extends AppCompatActivity {
 
     private String getViewName(View v) {
 
-        //
-        // This "helper method" accepts a View as an argument and returns its name as a string.
-        //
+        /* This "helper method" accepts a View as an argument and returns its name as a string. */
 
         String fullName = getResources().getResourceName(v.getId());
         String name = fullName.substring(fullName.lastIndexOf("/") + 1);
@@ -118,11 +110,9 @@ public class TicTacToeView extends AppCompatActivity {
 
     public void onClick(View v) {
 
-        //
-        // This is the "onClick()" method shared by all TextViews in the grid.  It should get the
-        // name of the clicked TextView, derive the row and column, encapsulate the corresponding
-        // square as a TicTacToeSquare object, then hand it off to the Controller for processing.
-        //
+        /* This is the "onClick()" method shared by all TextViews in the grid.  It gets the
+           name of the clicked TextView, derives the row and column, encapsulates the corresponding
+           square as a TicTacToeSquare object, then hands it off to the Controller for processing. */
 
         String name = getViewName(v);
         int row = Integer.parseInt(name.substring(6, 7));
@@ -130,17 +120,12 @@ public class TicTacToeView extends AppCompatActivity {
         TicTacToeSquare square = new TicTacToeSquare(row, col);
 
         controller.processInput(square);
-        //Toast.makeText(getBaseContext(), name, Toast.LENGTH_SHORT).show(); // disable this later
-
-
 
     }
 
     public void setResult(String text) {
 
-        //
-        // This method displays the argument string in the Result TextView
-        //
+        /* This method displays the argument string in the Result TextView */
 
         TextView result = (TextView)findViewById(R.id.result);
         result.setText(text);
@@ -150,7 +135,7 @@ public class TicTacToeView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        // Inflate the menu; this adds items to the action bar if it is present.
+        /* Inflates the menu; this adds items to the action bar if it is present. */
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -160,8 +145,8 @@ public class TicTacToeView extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        // Handle action bar item clicks here. The action bar will automatically handle clicks on
-        // the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+        /* Handles action bar item clicks here. The action bar will automatically handle clicks on
+           the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml. */
 
         int id = item.getItemId();
 

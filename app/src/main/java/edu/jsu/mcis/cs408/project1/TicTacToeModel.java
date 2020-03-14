@@ -27,20 +27,13 @@ public class TicTacToeModel {
 
     public void resetModel(int size) {
 
-        //
-        // This method resets the Model to its default state.  It should (re)initialize the size of
-        // the grid, (re)set X as the current player, and create a new grid array of Mark objects,
-        // initially filled with empty marks.
-        //
+
+        /* This method resets the Model to its default state.*/
 
         this.size = size;
         this.xTurn = true;
 
-        /* Create grid (width x width) as a 2D Mark array */
-
         grid = new Mark[size][size];
-
-        /* Initializes board by filling every square with empty marks */
 
         for (int row = 0; row < size; ++row) {
 
@@ -54,17 +47,15 @@ public class TicTacToeModel {
 
     public boolean setMark(TicTacToeSquare square) {
 
-        //
-        // This method accepts the target square as a TicTacToeSquare argument, and adds the
-        // current player's mark to this square.  First, it should use "isValidSquare()" to check if
-        // the specified square is within range, and then it should use "isSquareMarked()" to see if
-        // this square is already occupied!  If the specified location is valid, make a mark for the
-        // current player, then use "firePropertyChange()" to fire the corresponding property change
-        // event, which will inform the Controller that a change of state has taken place which
-        // requires a change to the View.  Finally, toggle "xTurn" (from TRUE to FALSE, or vice-
-        // versa) to switch to the other player.  Return TRUE if the mark was successfully added to
-        // the grid; otherwise, return FALSE.
-        //
+        /* This method accepts the target square as a TicTacToeSquare argument, and adds the
+           current player's mark to this square.  First, it uses "isValidSquare()" to check if
+           the specified square is within range, and then it uses "isSquareMarked()" to see if
+           this square is already occupied!  If the specified location is valid, makes a mark for the
+           current player, then uses "firePropertyChange()" to fire the corresponding property change
+           event, which will inform the Controller that a change of state has taken place which
+           requires a change to the View.  Finally, toggles "xTurn" (from TRUE to FALSE, or vice-
+           versa) to switch to the other player.  Retursn TRUE if the mark was successfully added to
+           the grid; otherwise, return FALSE. */
 
         int row = square.getRow();
         int col = square.getCol();
@@ -116,8 +107,6 @@ public class TicTacToeModel {
 
     public Mark getMark(int row, int col) {
 
-        // This method should return the Mark from the square at the specified location
-
         return grid[row][col];
 
     }
@@ -125,8 +114,8 @@ public class TicTacToeModel {
     public Result getResult() {
 
          /* Calls "isMarkWin()" to see if X or O is the winner, if the game is a
-           TIE, or if the game is not over.  Returns the corresponding Result
-           value */
+            TIE, or if the game is not over.  Returns the corresponding Result
+            value */
 
         if (isMarkWin(Mark.X)) {
             return Result.X;
@@ -145,8 +134,7 @@ public class TicTacToeModel {
 
     private boolean isMarkWin(Mark mark) {
 
-        /* Checks the squares of the board to see if the specified mark is the
-           winner */
+        /* Checks the squares of the board to see if the specified mark is the winner */
 
         boolean isMarkWin = false;
         String userMarks = "";
@@ -154,17 +142,18 @@ public class TicTacToeModel {
         String mark1 = "", mark2 = "", mark3 = "",mark4 = "";
 
         for (int j = 0; j < size; ++j) {
-            userMarks += mark;
+            userMarks += mark.toString();
         }
 
         for (int row = 0; row < size; ++row) {
 
             for (int col = 0; col < size; ++col) {
-                mark1 += grid[row][col];
-                mark2 += grid[col][row];
+                mark1 += (grid[row][col]).toString();
+                mark2 += (grid[col][row]).toString();
             }
-            mark3 += grid[row][row];
-            mark4 += grid[row][count];
+
+            mark3 += (grid[row][row]).toString();
+            mark4 += (grid[row][count]).toString();
             count--;
 
             if ( ( userMarks.equals(mark1) ) || ( userMarks.equals(mark2) ) ||
@@ -173,6 +162,7 @@ public class TicTacToeModel {
                 isMarkWin = true;
                 break;
             }
+
             else {
                 isMarkWin = false;
             }
@@ -213,14 +203,12 @@ public class TicTacToeModel {
 
     public boolean isXTurn() {
 
-        // Getter for "xTurn"
         return xTurn;
 
     }
 
     public int getSize() {
 
-        // Getter for "size"
         return size;
 
     }
